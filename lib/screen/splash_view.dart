@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'package:apnashop/screen/onboarding_view.dart';
 import 'package:apnashop/utils/app_colors.dart';
 import 'package:apnashop/utils/size_config.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,17 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
+  @override
+  void initState() {
+    super.initState();
+    Timer(Duration(seconds: 3), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => OnboardingView()),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,3 +1,4 @@
+import 'package:apnashop/screen/create_account_view.dart';
 import 'package:apnashop/utils/app_colors.dart';
 import 'package:apnashop/utils/size_config.dart';
 import 'package:apnashop/widget/custom_button.dart';
@@ -105,7 +106,17 @@ class _OnboardingViewState extends State<OnboardingView> {
                           ),
                         ),
                         SizedBox(height: 30),
-                        CustomButton(text: "Create Account", onPressed: () {}),
+                        CustomButton(
+                          text: "Create Account",
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CreateAccountView(),
+                              ),
+                            );
+                          },
+                        ),
                         SizedBox(height: 30),
                         TextButton(
                           onPressed: () {},

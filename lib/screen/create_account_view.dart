@@ -1,3 +1,4 @@
+import 'package:apnashop/screen/verification_view.dart';
 import 'package:apnashop/utils/app_colors.dart';
 import 'package:apnashop/utils/size_config.dart';
 import 'package:apnashop/widget/custom_button.dart';
@@ -11,6 +12,11 @@ class CreateAccountView extends StatefulWidget {
 }
 
 class _CreateAccountViewState extends State<CreateAccountView> {
+  bool isUsernameFilled = false;
+  bool isEmailFilled = false;
+  bool isPasswordFilled = false;
+  bool isPasswordVisible = false;
+  TextEditingController emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +56,11 @@ class _CreateAccountViewState extends State<CreateAccountView> {
                 SizedBox(
                   width: double.infinity,
                   child: TextField(
+                    onChanged: (value) {
+                      setState(() {
+                        isUsernameFilled = value.isNotEmpty;
+                      });
+                    },
                     decoration: InputDecoration(
                       hintText: "Create your username",
                       hintStyle: TextStyle(
@@ -58,13 +69,33 @@ class _CreateAccountViewState extends State<CreateAccountView> {
                       ),
                       prefixIcon: Icon(
                         Icons.person_outline,
-                        color: Colors.grey,
+                        color: isUsernameFilled
+                            ? AppColors.blueColor
+                            : Colors.grey,
                       ),
                       filled: true,
                       fillColor: AppColors.textfieldColor,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                         borderSide: BorderSide.none,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(
+                          color: isUsernameFilled
+                              ? AppColors.blueColor
+                              : Colors.transparent,
+                          width: 1.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(
+                          color: isUsernameFilled
+                              ? AppColors.blueColor
+                              : Colors.grey,
+                          width: 1.5,
+                        ),
                       ),
                     ),
                   ),
@@ -81,18 +112,47 @@ class _CreateAccountViewState extends State<CreateAccountView> {
                 SizedBox(
                   width: double.infinity,
                   child: TextField(
+                    controller: emailController,
+                    onChanged: (value) {
+                      setState(() {
+                        isEmailFilled = value.isNotEmpty;
+                      });
+                    },
                     decoration: InputDecoration(
                       hintText: "Enter your email or phone number",
                       hintStyle: TextStyle(
                         fontSize: SizeConfig.text(0.035),
                         color: Colors.grey,
                       ),
-                      prefixIcon: Icon(Icons.mail_outline, color: Colors.grey),
+                      prefixIcon: Icon(
+                        Icons.mail_outline,
+                        color: isEmailFilled
+                            ? AppColors.blueColor
+                            : Colors.grey,
+                      ),
                       filled: true,
                       fillColor: AppColors.textfieldColor,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                         borderSide: BorderSide.none,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(
+                          color: isEmailFilled
+                              ? AppColors.blueColor
+                              : Colors.transparent,
+                          width: 1.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(
+                          color: isEmailFilled
+                              ? AppColors.blueColor
+                              : Colors.grey,
+                          width: 1.5,
+                        ),
                       ),
                     ),
                   ),
@@ -109,17 +169,38 @@ class _CreateAccountViewState extends State<CreateAccountView> {
                 SizedBox(
                   width: double.infinity,
                   child: TextField(
-                    obscureText: true,
+                    onChanged: (value) {
+                      setState(() {
+                        isPasswordFilled = value.isNotEmpty;
+                      });
+                    },
+                    obscureText: isPasswordVisible,
                     decoration: InputDecoration(
                       hintText: "Create your password",
                       hintStyle: TextStyle(
                         fontSize: SizeConfig.text(0.035),
                         color: Colors.grey,
                       ),
-                      prefixIcon: Icon(Icons.lock_outline, color: Colors.grey),
-                      suffixIcon: Icon(
-                        Icons.visibility_outlined,
-                        color: Colors.grey,
+                      prefixIcon: Icon(
+                        Icons.lock_outline,
+                        color: isPasswordFilled
+                            ? AppColors.blueColor
+                            : Colors.grey,
+                      ),
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            isPasswordVisible = !isPasswordVisible;
+                          });
+                        },
+                        icon: Icon(
+                          isPasswordVisible
+                              ? Icons.visibility_outlined
+                              : Icons.visibility_off_outlined,
+                          color: isPasswordFilled
+                              ? AppColors.blueColor
+                              : Colors.grey,
+                        ),
                       ),
                       filled: true,
                       fillColor: AppColors.textfieldColor,
@@ -127,11 +208,43 @@ class _CreateAccountViewState extends State<CreateAccountView> {
                         borderRadius: BorderRadius.circular(15),
                         borderSide: BorderSide.none,
                       ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(
+                          color: isPasswordFilled
+                              ? AppColors.blueColor
+                              : Colors.transparent,
+                          width: 1.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(
+                          color: isPasswordFilled
+                              ? AppColors.blueColor
+                              : Colors.grey,
+                          width: 1.5,
+                        ),
+                      ),
                     ),
                   ),
                 ),
                 SizedBox(height: 30),
-                CustomButton(text: "Create Account", onPressed: () {}),
+                CustomButton(
+                  text: "Create Account",
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => VerificationView(
+                          email: emailController.text.isEmpty
+                              ? "unknown@gmail.com"
+                              : emailController.text,
+                        ),
+                      ),
+                    );
+                  },
+                ),
                 SizedBox(height: 15),
                 Center(
                   child: Text(

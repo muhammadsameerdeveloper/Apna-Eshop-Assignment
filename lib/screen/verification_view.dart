@@ -1,5 +1,6 @@
 import 'package:apnashop/utils/app_colors.dart';
 import 'package:apnashop/utils/size_config.dart';
+import 'package:apnashop/widget/custom_buttomsheet.dart';
 import 'package:apnashop/widget/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
@@ -122,7 +123,12 @@ class _VerificationViewState extends State<VerificationView> {
                 ),
               ),
               SizedBox(height: 50),
-              CustomButton(text: "Submit", onPressed: () {}),
+              CustomButton(
+                text: "Submit",
+                onPressed: () {
+                  showCustomBottomSheet(context);
+                },
+              ),
               SizedBox(height: 5),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

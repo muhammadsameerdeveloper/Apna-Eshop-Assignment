@@ -1,10 +1,17 @@
 import 'package:apnashop/utils/app_colors.dart';
 import 'package:apnashop/utils/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  PageController pageController = PageController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,46 +52,159 @@ class HomeView extends StatelessWidget {
               ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Home",
-                    style: TextStyle(
-                      fontSize: SizeConfig.text(0.05),
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      TextButton(onPressed: () {}, child: Text("Home")),
+                      SizedBox(height: 5),
+                      Container(
+                        height: 2,
+                        width: 100,
+                        color: AppColors.blueColor,
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(width: 80),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Category",
-                    style: TextStyle(
-                      fontSize: SizeConfig.text(0.05),
-                      color: Colors.grey,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+                Expanded(child: Center(child: Text("Category"))),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 80,
-                  child: Divider(color: AppColors.blueColor, thickness: 2),
+            SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: SizedBox(
+                height: 180,
+                child: PageView(
+                  controller: pageController,
+                  children: [
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadiusGeometry.circular(16),
+                          child: Image.asset(
+                            "assets/images/Mans Jeans Poster.png",
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: Colors.grey,
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadiusGeometry.circular(16),
+                          child: Image.asset(
+                            "assets/images/Woman Jeans Poster.png",
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: Colors.grey,
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadiusGeometry.circular(16),
+                          child: Image.asset(
+                            "assets/images/Kids Jeans Poster.png",
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(width: 80),
-                SizedBox(
-                  width: 80,
-                  child: Divider(color: AppColors.blueColor, thickness: 2),
-                ),
-              ],
+              ),
+            ),
+            SizedBox(height: 20),
+            SmoothPageIndicator(
+              controller: pageController,
+              count: 3,
+              effect: WormEffect(
+                activeDotColor: AppColors.blueColor,
+                dotHeight: 8,
+                dotWidth: 8,
+                dotColor: Colors.grey.shade300,
+              ),
+            ),
+            SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "New Arrifals 🔥",
+                    style: TextStyle(
+                      fontSize: SizeConfig.text(0.05),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "See All",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: SizeConfig.text(0.04),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    height: SizeConfig.height * 0.22,
+                    width: SizeConfig.width * 0.42,
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadiusGeometry.circular(20),
+
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            "assets/images/onboarding1.jpg",
+                            fit: BoxFit.fill,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 170,
+                    width: 150,
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadiusGeometry.circular(20),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

@@ -178,17 +178,9 @@ class _HomeViewState extends State<HomeView> {
                     decoration: BoxDecoration(
                       color: Colors.grey,
                       borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadiusGeometry.circular(20),
-
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            "assets/images/onboarding1.jpg",
-                            fit: BoxFit.fill,
-                          ),
-                        ],
+                      image: DecorationImage(
+                        image: AssetImage("assets/images/onboarding1.jpg"),
+                        fit: BoxFit.fill,
                       ),
                     ),
                   ),

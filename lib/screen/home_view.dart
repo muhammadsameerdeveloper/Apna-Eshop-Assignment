@@ -1,5 +1,6 @@
 import 'package:apnashop/utils/app_colors.dart';
 import 'package:apnashop/utils/size_config.dart';
+import 'package:apnashop/widget/custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -167,36 +168,11 @@ class _HomeViewState extends State<HomeView> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    height: SizeConfig.height * 0.22,
-                    width: SizeConfig.width * 0.42,
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(
-                        image: AssetImage("assets/images/onboarding1.jpg"),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 170,
-                    width: 150,
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadiusGeometry.circular(20),
-                    ),
-                  ),
-                ],
-              ),
+            CustomCard(
+              image: "assets/images/sublevelmansjeans.jpg",
+              name: "Men's Jeans",
+              brand: "SubLevel",
+              price: "9000",
             ),
           ],
         ),
